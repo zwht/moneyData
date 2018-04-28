@@ -1,8 +1,7 @@
-var express = require('express');
-var router = express.Router();
-
+import * as express from "express";
+let usersRouter = express.Router();
 /* GET users listing. */
-router.get('/:id', function (req, res, next) {
+usersRouter.get('/:id', function (req, res, next) {
 	var products = [
 		{name: 'apple juice', description: 'good', price: 12.12},
 		{name: 'banana juice', description: 'just so sos', price: 4.50}
@@ -15,4 +14,4 @@ router.get('/:id', function (req, res, next) {
 });
 
 
-module.exports = router;
+export {usersRouter};

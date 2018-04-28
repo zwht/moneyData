@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
+import * as express from "express";
+let postRouter = express.Router();
 
-router.post('/', function (req, res) {
+postRouter.post('/', function (req, res) {
 	if (typeof req.param('name') === "undefined") {
 		res.statusCode = 400;
 		res.send('Error 400: products properties 222');
@@ -10,4 +10,4 @@ router.post('/', function (req, res) {
 	}
 });
 
-module.exports = router;
+export {postRouter};
