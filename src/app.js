@@ -5,6 +5,7 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var saveData = require("./service/saveData");
 // 启动命令
 // DEBUG=myapp npm start
 var index_1 = require("./routes/index");
@@ -36,3 +37,4 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+saveData.save();

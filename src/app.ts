@@ -3,6 +3,7 @@ import * as express from "express";
 import * as path from 'path';
 import * as cookieParser from 'cookie-parser';
 import * as logger from 'morgan';
+import * as saveData from './service/saveData'
 // 启动命令
 // DEBUG=myapp npm start
 import {indexRouter} from './routes/index';
@@ -41,5 +42,6 @@ app.use(function (err, req, res, next) {
 	res.render('error');
 });
 
+saveData.save();
 export {app};
 

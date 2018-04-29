@@ -6,6 +6,12 @@ var url = 'https://www.huobipro.com/zh-cn/eos_usdt/exchange/'
 var dataPath = '/Users/zhaowei/projects/zw/moneyData/src/phantom/data/'
 
 phantom.outputEncoding = "utf-8";
+function pad2(n) { return n < 10 ? '0' + n : n }
+function getTime(){
+  var time=new Date();
+  return time.getFullYear()+'-'+pad2(time.getMonth()+1)+'-'+pad2(time.getDate())+
+  ' '+pad2(time.getHours())+':'+pad2(time.getMinutes())+':'+pad2(time.getSeconds())
+}
 // 文件写入
 function reateFolder(to) {
 	var sep = path.sep
@@ -18,7 +24,8 @@ function reateFolder(to) {
 		}
 	}
 }
-function getData() {
+function getData(time) {
+	console.log(time);
 	var content = page.evaluate(function () {
 		var data = '';
 		var element = document.querySelector('.coin_list').querySelectorAll('.coin_unit');
@@ -36,9 +43,9 @@ function getData() {
 		}
 		return data;
 	});
-	console.log(content);
+	// console.log(content);
 	try {
-		var pathUrl = dataPath + (new Date().getTime()).toString() + '.txt';
+		var pathUrl = dataPath + time + '.txt';
 		//console.log(pathUrl);
 		try {
 			fs.write(pathUrl, content, 'a');
@@ -61,17 +68,17 @@ function getData() {
 		console.log(e);
 	}
 	setTimeout(function () {
-		getData();
-	}, 2000)
+		getData(getTime());
+	}, 1000)
 }
 
 // reateFolder(dataPath);
 page.open(url, function (status) {
 	if (status === "success") {
-		console.log(page.title);
-		getData();
+		//console.log(page.title);
+		getData(getTime());
 	} else {
-		console.log("Page failed to load.");
+		//console.log("Page failed to load.");
 	}
 	// phantom.exit(0);
 });
