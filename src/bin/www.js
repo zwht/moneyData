@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var app_1 = require("./../app");
+var app = require("./../app");
 var debug = require("debug");
 //let debug = require('debug')('moneyData:server');
 var http = require("http");
@@ -9,12 +9,12 @@ var http = require("http");
  * Get port from environment and store in Express.
  */
 var port = normalizePort(process.env.PORT || '3000');
-app_1.app.set('port', port);
+app.app.set('port', port);
 console.log('http://localhost:' + port);
 /**
  * Create HTTP server.
  */
-var server = http.createServer(app_1.app);
+var server = http.createServer(app.app);
 /**
  * Listen on provided port, on all network interfaces.
  */

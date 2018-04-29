@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-import {app} from "./../app"
+import * as app from "./../app"
 import * as debug from "debug"
 //let debug = require('debug')('moneyData:server');
 import * as http from "http"
@@ -13,13 +13,13 @@ import * as http from "http"
  */
 
 let port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+app.app.set('port', port);
 console.log('http://localhost:' + port);
 /**
  * Create HTTP server.
  */
 
-let server = http.createServer(app);
+let server = http.createServer(app.app);
 
 /**
  * Listen on provided port, on all network interfaces.
