@@ -11,6 +11,7 @@ var saveData = require("./service/saveData");
 var index_1 = require("./routes/index");
 var users_1 = require("./routes/users");
 var post_1 = require("./routes/post");
+var routerServer_1 = require("./routes/routerServer");
 var app = express();
 exports.app = app;
 // view engine setup
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index_1.indexRouter);
 app.use('/users', users_1.usersRouter);
 app.use('/post', post_1.postRouter);
+routerServer_1.routerServer(app);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
