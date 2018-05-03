@@ -14,12 +14,12 @@ function getTime() {
 function readFile() {
   let listObj = []
   let nowTime = dataPath + getTime() + '.txt';
-  nowTime = "/Users/zhaowei/projects/zw/moneyData/src/phantom/2018-04-30 03:03:40.txt"
+  // nowTime = "/Users/zhaowei/projects/zw/moneyData/src/phantom/2018-04-30 03:03:40.txt"
 
   try {
     fs.readFile(nowTime, 'utf-8', function (err, data) {
       if (err) {
-        console.error(err);
+        //console.error(err);
       } else {
         // 在.txt文件获取成功后，数据处理
         let list = data.split('#');
@@ -46,7 +46,6 @@ function readFile() {
               }
             }
             if (!key) {
-              console.log('=============')
               currencyModel.create({
                 name: listObj[i].name,
                 time: new Date().getTime()
@@ -58,11 +57,14 @@ function readFile() {
 
         // 把币当前交易价格插入币交易表
         costModel.collection.insert(listObj, {}, function (err, jellybean, snickers) {
+          // 删除文件
+          fs.unlink(nowTime,(err)=>{
+          })
         })
       }
     });
   } catch (e) {
-    console.error(e)
+    //console.error(e)
   }
   setTimeout(() => {
     readFile();

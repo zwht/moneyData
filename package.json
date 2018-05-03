@@ -5,7 +5,7 @@
   
   "scripts": {
     "start": "supervisor -w build ./src/bin/www",
-    "phantomjs": "node_modules/.bin/phantomjs",
+    "phantomjs": "node_modules/.bin/phantomjs ./src/phantom/app.js",
     "build": "tsc"
   },
   "dependencies": {

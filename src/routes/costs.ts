@@ -2,7 +2,7 @@ import { list } from '../controller/costs/list'
 
 let costs = [
   {
-    path: '/costs/list',
+    path: '/zw/costs/list',
     type: 'post',
     controller: list
   }

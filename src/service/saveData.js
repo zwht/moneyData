@@ -13,11 +13,11 @@ function getTime() {
 function readFile() {
     var listObj = [];
     var nowTime = dataPath + getTime() + '.txt';
-    nowTime = "/Users/zhaowei/projects/zw/moneyData/src/phantom/2018-04-30 03:03:40.txt";
+    // nowTime = "/Users/zhaowei/projects/zw/moneyData/src/phantom/2018-04-30 03:03:40.txt"
     try {
         fs.readFile(nowTime, 'utf-8', function (err, data) {
             if (err) {
-                console.error(err);
+                //console.error(err);
             }
             else {
                 // 在.txt文件获取成功后，数据处理
@@ -27,7 +27,8 @@ function readFile() {
                     listObj.push({
                         name: item[0],
                         value: item[1],
-                        scale: item[2]
+                        scale: item[2],
+                        time: new Date().getTime()
                     });
                 }
                 // 获取币表，如果有新币，添加到表
@@ -42,9 +43,9 @@ function readFile() {
                             }
                         }
                         if (!key) {
-                            console.log('=============');
                             db_1.currencyModel.create({
-                                name: listObj[i].name
+                                name: listObj[i].name,
+                                time: new Date().getTime()
                             }, function (e, data) {
                             });
                         }
@@ -52,12 +53,15 @@ function readFile() {
                 });
                 // 把币当前交易价格插入币交易表
                 db_1.costModel.collection.insert(listObj, {}, function (err, jellybean, snickers) {
+                    // 删除文件
+                    fs.unlink(nowTime, function (err) {
+                    });
                 });
             }
         });
     }
     catch (e) {
-        console.error(e);
+        //console.error(e)
     }
     setTimeout(function () {
         readFile();

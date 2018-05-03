@@ -4,5 +4,8 @@ var mongoose = require("mongoose");
 mongoose.connect('mongodb://localhost:27017/moneyData');
 var currencyModel = mongoose.model('currency', { name: String });
 exports.currencyModel = currencyModel;
-var costModel = mongoose.model('cost', { name: String });
+var costModel = mongoose.model('cost', {
+    name: String, value: String, scale: String,
+    time: Number
+});
 exports.costModel = costModel;
